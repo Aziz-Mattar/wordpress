@@ -1,3 +1,7 @@
 <?php
 
-echo 'this is singular.php';
+get_header();
+
+get_footer();
+
+?>
