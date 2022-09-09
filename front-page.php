@@ -1,7 +1,4 @@
-<?php 
-get_header();
-?>
-
+<?php  get_header(); ?>
 <!-- LOADER -->
 <div id="preloader">
     <img class="preloader" src="assets/images/loader.gif" alt="">
@@ -1125,8 +1122,4 @@ get_header();
     
 </div><!-- end wrapper -->
 
-<?php 
-
-get_footer();
-
-?>
+<?php get_footer(); ?>
