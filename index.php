@@ -1,3 +1,3 @@
 <?php
 
-echo 'It works';
+echo 'This is index.php';
