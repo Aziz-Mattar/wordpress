@@ -5,7 +5,7 @@ $post_id = get_the_ID();
 $post_meta = get_post_meta($post_id);
 $visits_count = ((int)($post_meta['wpc_post_views'][0])) + 1;
 update_post_meta($post_id, 'wpc_post_views', $visits_count);
-
+$post_link = get_permalink($post_id);
 get_header();
 while(have_posts()) {
     the_post();
@@ -38,15 +38,7 @@ while(have_posts()) {
                             <small><a href="#" title=""><i class="fa fa-eye"></i> <?php echo $visits_count; ?></a></small>
                         </div><!-- end meta -->
                                 
-                        <div class="post-sharing">
-                            <ul class="list-inline">
-                            <?php
-                            $post_link = get_permalink($post_id);
-                            ?>
-                                <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $post_link; ?>" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
-                                <li><a target="_blank" href="https://twitter.com/intent/tweet?url=<?php echo $post_link; ?>" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
-                            </ul>
-                        </div><!-- end post-sharing -->
+                        <?php get_template_part('partials/single-share', null, ['post_link' => $post_link]) ?>
                     </div><!-- end title -->
                     <?php if (has_post_thumbnail($post_id)) { ?>
                     <div class="single-post-media">
@@ -71,13 +63,7 @@ while(have_posts()) {
                             ?>
                         </div><!-- end meta -->
 
-                        <div class="post-sharing">
-                            <ul class="list-inline">
-                                <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
-                                <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
-                                <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div><!-- end post-sharing -->
+                        <?php get_template_part('partials/single-share', null, ['post_link' => $post_link]); ?>
                     </div><!-- end title -->
 
                     <div class="row">
