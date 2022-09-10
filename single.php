@@ -7,9 +7,8 @@ $visits_count = ((int)($post_meta['wpc_post_views'][0])) + 1;
 update_post_meta($post_id, 'wpc_post_views', $visits_count);
 
 get_header();
-if (have_posts()) {
-    while(have_posts()) {
-        the_post();
+while(have_posts()) {
+    the_post();
 ?>
 <section class="section wb">
     <div class="container">
@@ -356,7 +355,6 @@ if (have_posts()) {
     </div><!-- end container -->
 </section>
 <?php
-}
 }
 get_footer();
 ?>

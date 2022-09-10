@@ -21,6 +21,7 @@ get_header();
     </div><!-- end container -->
 </div><!-- end page-title -->
 
+<?php if (have_posts()) { ?>
 <section class="section wb">
     <div class="container">
         <div class="row">
@@ -28,41 +29,39 @@ get_header();
                 <div class="page-wrapper">
                     <div class="portfolio row">
                     <?php 
-                    if (have_posts()) {
-                        while(have_posts()) {
-                            the_post();
-                            $post_id = get_the_ID();
-                            $post_link = get_permalink($post_id);
-                            $post_title = get_the_title();
-                            $post_categories = get_the_terms($post_id, 'category');
-                            ?>
-                            <div class="pitem item-w1 item-h1">
-                                <div class="blog-box">
-                                    <div class="post-media">
-                                        <a href="<?php echo $post_link; ?>" title="<?php echo $post_title; ?>">
-                                            <?php the_post_thumbnail('medium'); ?>
-                                            <div class="hovereffect">
-                                                <span></span>
-                                            </div><!-- end hover -->
-                                        </a>
-                                    </div><!-- end media -->
-                                    <div class="blog-meta">
-                                        <?php
-                                        if (is_array($post_categories)) {
-                                            foreach ($post_categories as $category) {
-                                                echo '<span class="bg-grey"><a href="'.get_term_link($category).'" title="">'.$category->name.'</a></span>';
-                                            }
+                    while(have_posts()) {
+                        the_post();
+                        $post_id = get_the_ID();
+                        $post_link = get_permalink($post_id);
+                        $post_title = get_the_title();
+                        $post_categories = get_the_terms($post_id, 'category');
+                        ?>
+                        <div class="pitem item-w1 item-h1">
+                            <div class="blog-box">
+                                <div class="post-media">
+                                    <a href="<?php echo $post_link; ?>" title="<?php echo $post_title; ?>">
+                                        <?php the_post_thumbnail('medium'); ?>
+                                        <div class="hovereffect">
+                                            <span></span>
+                                        </div><!-- end hover -->
+                                    </a>
+                                </div><!-- end media -->
+                                <div class="blog-meta">
+                                    <?php
+                                    if (is_array($post_categories)) {
+                                        foreach ($post_categories as $category) {
+                                            echo '<span class="bg-grey"><a href="'.get_term_link($category).'" title="">'.$category->name.'</a></span>';
                                         }
-                                        ?>
-                                        
-                                        <h4><a href="<?php echo $post_link; ?>" title="<?php echo $post_title; ?>"><?php echo $post_title; ?></a></h4>
-                                        <small><a href="<?php echo get_author_posts_url(get_the_author_meta('ID')) ?>" title="">By: <?php echo get_the_author_meta('display_name'); ?></a></small>
-                                        <small><a href="<?php echo get_month_link(get_the_date('Y'), get_the_date('m')) ?>" title=""><?php echo get_the_date('d M, Y') ?></a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-                            </div><!-- end col -->
-                            <?php
-                        }
+                                    }
+                                    ?>
+                                    
+                                    <h4><a href="<?php echo $post_link; ?>" title="<?php echo $post_title; ?>"><?php echo $post_title; ?></a></h4>
+                                    <small><a href="<?php echo get_author_posts_url(get_the_author_meta('ID')) ?>" title="">By: <?php echo get_the_author_meta('display_name'); ?></a></small>
+                                    <small><a href="<?php echo get_month_link(get_the_date('Y'), get_the_date('m')) ?>" title=""><?php echo get_the_date('d M, Y') ?></a></small>
+                                </div><!-- end meta -->
+                            </div><!-- end blog-box -->
+                        </div><!-- end col -->
+                        <?php
                     }
                     ?>
                     </div><!-- end portfolio -->
@@ -88,7 +87,10 @@ get_header();
         </div><!-- end row -->
     </div><!-- end container -->
 </section>
-
+<?php } else {
+    echo 'No posts found';
+}
+?>
 <?php
 
 get_footer();
