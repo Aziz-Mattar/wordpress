@@ -16,6 +16,7 @@ $base = get_template_directory_uri() . '/';
         wp_enqueue_script('wpc_jquery', $base . 'assets/js/jquery.min.js', [], null, true);
         wp_enqueue_script('wpc_tether', $base . 'assets/js/tether.min.js', [], null, true);
         wp_enqueue_script('wpc_bootstrap', $base . 'assets/js/bootstrap.min.js', [], null, true);
+        wp_enqueue_script('wpc_masonry', $base . 'assets/js/masonry.js', [], null, true);
         wp_enqueue_script('wpc_custom', $base . 'assets/js/custom.js', [], null, true);
     }
     add_action('wp_enqueue_scripts', 'wpc_load_assets');

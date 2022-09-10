@@ -49,10 +49,11 @@ if (have_posts()) {
                             </ul>
                         </div><!-- end post-sharing -->
                     </div><!-- end title -->
-
+                    <?php if (has_post_thumbnail($post_id)) { ?>
                     <div class="single-post-media">
                         <?php the_post_thumbnail(); ?>
                     </div><!-- end media -->
+                    <?php } ?>
 
                     <div class="blog-content">  
                         <?php the_content(); ?>
@@ -358,5 +359,4 @@ if (have_posts()) {
 }
 }
 get_footer();
-
 ?>
