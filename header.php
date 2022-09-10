@@ -30,9 +30,10 @@
 
 </head>
 <body>
+<?php global $base; ?>
 <!-- LOADER -->
 <div id="preloader">
-    <img class="preloader" src="assets/images/loader.gif" alt="">
+    <img class="preloader" src="<?php echo $base; ?>assets/images/loader.gif" alt="">
 </div><!-- end loader -->
 <!-- END LOADER -->
 

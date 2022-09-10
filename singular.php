@@ -1,8 +1,10 @@
 <?php
 
-$post_meta = get_post_meta(get_the_ID());
+$post_id = get_the_ID();
+
+$post_meta = get_post_meta($post_id);
 $visits_count = ((int)($post_meta['wpc_post_views'][0])) + 1;
-update_post_meta(get_the_ID(), 'wpc_post_views', $visits_count);
+update_post_meta($post_id, 'wpc_post_views', $visits_count);
 
 get_header();
 if (have_posts()) {
@@ -21,16 +23,18 @@ if (have_posts()) {
                             <li class="breadcrumb-item active">The golden rules you need to know for a positive life</li>
                         </ol>
                         <?php 
-                        $categories = get_the_terms(get_the_ID(), 'category');
-                        foreach($categories as $category) {
-                            echo '<span class="color-aqua"><a href="'.get_term_link($category).'" title="">'.$category->name.'</a></span>';
+                        $categories = get_the_terms($post_id, 'category');
+                        if (is_array($categories)) {
+                            foreach($categories as $category) {
+                                echo '<span class="color-aqua"><a href="'.get_term_link($category).'" title="">'.$category->name.'</a></span>';
+                            }
                         }
                         ?>
 
                         <h3><?php echo get_the_title(); ?></h3>
 
                         <div class="blog-meta big-meta">
-                            <small><a href="<?php echo get_year_link(get_the_date('Y')) ?>" title=""><?php echo get_the_date('d M, Y', get_the_ID()) ?></a></small>
+                            <small><a href="<?php echo get_year_link(get_the_date('Y')) ?>" title=""><?php echo get_the_date('d M, Y', $post_id) ?></a></small>
                             <small><a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" title="">by <?php echo get_the_author_meta('display_name'); ?></a></small>
                             <small><a href="#" title=""><i class="fa fa-eye"></i> <?php echo $visits_count; ?></a></small>
                         </div><!-- end meta -->
@@ -38,7 +42,7 @@ if (have_posts()) {
                         <div class="post-sharing">
                             <ul class="list-inline">
                             <?php
-                            $post_link = get_permalink(get_the_ID());
+                            $post_link = get_permalink($post_id);
                             ?>
                                 <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $post_link; ?>" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
                                 <li><a target="_blank" href="https://twitter.com/intent/tweet?url=<?php echo $post_link; ?>" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
@@ -58,9 +62,11 @@ if (have_posts()) {
                         <div class="tag-cloud-single">
                             <span>Tags</span>
                             <?php 
-                            $tags = get_the_terms(get_the_ID(), 'post_tag');
-                            foreach($tags as $tag) {
-                                echo '<small><a href="'.get_term_link($tag).'" title="">'.$tag->name.'</a></small>';
+                            $tags = get_the_terms($post_id, 'post_tag');
+                            if (is_array($tags)) {
+                                foreach($tags as $tag) {
+                                    echo '<small><a href="'.get_term_link($tag).'" title="">'.$tag->name.'</a></small>';
+                                }
                             }
                             ?>
                         </div><!-- end meta -->
@@ -89,11 +95,11 @@ if (have_posts()) {
                     <?php
                     $next_post = get_next_post();
                     $previous_post = get_previous_post();
-                    
                     ?>
                     <div class="custombox prevnextpost clearfix">
                         <div class="row">
                             <div class="col-lg-6">
+                            <?php if (is_object($previous_post)) { ?>
                                 <div class="blog-list-widget">
                                     <div class="list-group">
                                         <a href="<?php echo get_permalink($previous_post->ID) ?>" class="list-group-item list-group-item-action flex-column align-items-start">
@@ -105,9 +111,11 @@ if (have_posts()) {
                                         </a>
                                     </div>
                                 </div>
+                            <?php } ?>
                             </div><!-- end col -->
 
                             <div class="col-lg-6">
+                            <?php if (is_object($next_post)) { ?>
                                 <div class="blog-list-widget">
                                     <div class="list-group">
                                         <a href="<?php echo get_permalink($next_post) ?>" class="list-group-item list-group-item-action flex-column align-items-start">
@@ -119,6 +127,7 @@ if (have_posts()) {
                                         </a>
                                     </div>
                                 </div>
+                            <?php } ?>
                             </div><!-- end col -->
                         </div><!-- end row -->
                     </div><!-- end author-box -->

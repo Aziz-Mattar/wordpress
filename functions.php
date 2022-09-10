@@ -1,9 +1,12 @@
 <?php 
 
-if (!function_exists('wpc_load_assets')) {
-    function wpc_load_assets()
-    {
+$base = get_template_directory_uri() . '/';
+
+ if (!function_exists('wpc_load_assets')) {
+     function wpc_load_assets()
+     {
         $base = get_template_directory_uri() . '/';
+        global $base;
         wp_enqueue_style('wpc_bootstrap', $base . 'assets/css/bootstrap.css', [], null);
         wp_enqueue_style('wpc_fontawesome', $base . 'assets/css/font-awesome.min.css', ['wpc_bootstrap'], null);
         wp_enqueue_style('wpc_style', $base . 'assets/style.css', [], null);
