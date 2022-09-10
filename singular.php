@@ -1,5 +1,9 @@
 <?php
 
+$post_meta = get_post_meta(get_the_ID());
+$visits_count = ((int)($post_meta['wpc_post_views'][0])) + 1;
+update_post_meta(get_the_ID(), 'wpc_post_views', $visits_count);
+
 get_header();
 if (have_posts()) {
     while(have_posts()) {
@@ -28,7 +32,7 @@ if (have_posts()) {
                         <div class="blog-meta big-meta">
                             <small><a href="<?php echo get_year_link(get_the_date('Y')) ?>" title=""><?php echo get_the_date('d M, Y', get_the_ID()) ?></a></small>
                             <small><a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" title="">by <?php echo get_the_author_meta('display_name'); ?></a></small>
-                            <small><a href="#" title=""><i class="fa fa-eye"></i> 2344</a></small>
+                            <small><a href="#" title=""><i class="fa fa-eye"></i> <?php echo $visits_count; ?></a></small>
                         </div><!-- end meta -->
                                 
                         <div class="post-sharing">
