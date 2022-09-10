@@ -9,6 +9,7 @@ if (!function_exists('wpc_load_assets')) {
         wp_enqueue_style('wpc_style', $base . 'assets/style.css', [], null);
         wp_enqueue_style('wpc_responsive', $base . 'assets/css/responsive.css', [], null);
         wp_enqueue_style('wpc_colors', $base . 'assets/css/colors.css', [], null);
+        wp_enqueue_style('wpc_theme_style', $base . 'style.css', [], rand(1, 10000));
         wp_enqueue_script('wpc_jquery', $base . 'assets/js/jquery.min.js', [], null, true);
         wp_enqueue_script('wpc_tether', $base . 'assets/js/tether.min.js', [], null, true);
         wp_enqueue_script('wpc_bootstrap', $base . 'assets/js/bootstrap.min.js', [], null, true);

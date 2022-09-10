@@ -1,5 +1,9 @@
 <?php
+
 get_header();
+if (have_posts()) {
+    while(have_posts()) {
+        the_post();
 ?>
 <section class="section wb">
     <div class="container">
@@ -18,13 +22,12 @@ get_header();
                             echo '<span class="color-aqua"><a href="'.get_term_link($category).'" title="">'.$category->name.'</a></span>';
                         }
                         ?>
-                        
 
                         <h3><?php echo get_the_title(); ?></h3>
 
                         <div class="blog-meta big-meta">
                             <small><a href="<?php echo get_year_link(get_the_date('Y')) ?>" title=""><?php echo get_the_date('d M, Y', get_the_ID()) ?></a></small>
-                            <small><a href="blog-author.html" title="">by Jessica</a></small>
+                            <small><a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" title="">by <?php echo get_the_author_meta('display_name'); ?></a></small>
                             <small><a href="#" title=""><i class="fa fa-eye"></i> 2344</a></small>
                         </div><!-- end meta -->
                                 
@@ -126,8 +129,8 @@ get_header();
                             </div><!-- end col -->
 
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                <h4><a href="#">Jessica</a></h4>
-                                <p>Quisque sed tristique felis. Lorem <a href="#">visit my website</a> amet, consectetur adipiscing elit. Phasellus quis mi auctor, tincidunt nisl eget, finibus odio. Duis tempus elit quis risus congue feugiat. Thanks for stop Cloapedia!</p>
+                                <h4><a href="#"><?php echo get_the_author_meta('display_name'); ?></a></h4>
+                                <p><?php echo get_the_author_meta('description'); ?></p>
 
                                 <div class="topsocial">
                                     <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
@@ -339,6 +342,8 @@ get_header();
     </div><!-- end container -->
 </section>
 <?php
+}
+}
 get_footer();
 
 ?>
