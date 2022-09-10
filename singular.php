@@ -12,41 +12,50 @@ get_header();
                             <li class="breadcrumb-item"><a href="#">Blog</a></li>
                             <li class="breadcrumb-item active">The golden rules you need to know for a positive life</li>
                         </ol>
-
-                        <span class="color-aqua"><a href="blog-category-01.html" title="">Lifestyle</a></span>
+                        <?php 
+                        $categories = get_the_terms(get_the_ID(), 'category');
+                        foreach($categories as $category) {
+                            echo '<span class="color-aqua"><a href="'.get_term_link($category).'" title="">'.$category->name.'</a></span>';
+                        }
+                        ?>
+                        
 
                         <h3><?php echo get_the_title(); ?></h3>
 
                         <div class="blog-meta big-meta">
-                            <small><a href="single.html" title="">21 July, 2017</a></small>
+                            <small><a href="<?php echo get_year_link(get_the_date('Y')) ?>" title=""><?php echo get_the_date('d M, Y', get_the_ID()) ?></a></small>
                             <small><a href="blog-author.html" title="">by Jessica</a></small>
                             <small><a href="#" title=""><i class="fa fa-eye"></i> 2344</a></small>
                         </div><!-- end meta -->
-
+                                
                         <div class="post-sharing">
                             <ul class="list-inline">
-                                <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
-                                <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
-                                <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
+                            <?php
+                            $post_link = get_permalink(get_the_ID());
+                            ?>
+                                <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $post_link; ?>" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
+                                <li><a target="_blank" href="https://twitter.com/intent/tweet?url=<?php echo $post_link; ?>" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
                             </ul>
                         </div><!-- end post-sharing -->
                     </div><!-- end title -->
 
                     <div class="single-post-media">
-                        <img src="upload/menu_08.jpg" alt="" class="img-fluid">
+                        <?php the_post_thumbnail(); ?>
                     </div><!-- end media -->
 
                     <div class="blog-content">  
-                        <?php echo get_the_content(); ?>
+                        <?php the_content(); ?>
                     </div><!-- end content -->
 
                     <div class="blog-title-area">
                         <div class="tag-cloud-single">
                             <span>Tags</span>
-                            <small><a href="#" title="">lifestyle</a></small>
-                            <small><a href="#" title="">colorful</a></small>
-                            <small><a href="#" title="">trending</a></small>
-                            <small><a href="#" title="">another tag</a></small>
+                            <?php 
+                            $tags = get_the_terms(get_the_ID(), 'post_tag');
+                            foreach($tags as $tag) {
+                                echo '<small><a href="'.get_term_link($tag).'" title="">'.$tag->name.'</a></small>';
+                            }
+                            ?>
                         </div><!-- end meta -->
 
                         <div class="post-sharing">
@@ -70,15 +79,20 @@ get_header();
 
                     <hr class="invis1">
 
+                    <?php
+                    $next_post = get_next_post();
+                    $previous_post = get_previous_post();
+                    
+                    ?>
                     <div class="custombox prevnextpost clearfix">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="blog-list-widget">
                                     <div class="list-group">
-                                        <a href="single.html" class="list-group-item list-group-item-action flex-column align-items-start">
+                                        <a href="<?php echo get_permalink($previous_post->ID) ?>" class="list-group-item list-group-item-action flex-column align-items-start">
                                             <div class="w-100 justify-content-between text-right">
-                                                <img src="upload/blog_square_02.jpg" alt="" class="img-fluid float-right">
-                                                <h5 class="mb-1">5 Beautiful buildings you need to before dying</h5>
+                                                <?php echo get_the_post_thumbnail($previous_post, 'thumbnail'); ?>
+                                                <h5 class="mb-1"><?php echo $previous_post->post_title; ?></h5>
                                                 <small>Prev Post</small>
                                             </div>
                                         </a>
@@ -89,10 +103,10 @@ get_header();
                             <div class="col-lg-6">
                                 <div class="blog-list-widget">
                                     <div class="list-group">
-                                        <a href="single.html" class="list-group-item list-group-item-action flex-column align-items-start">
+                                        <a href="<?php echo get_permalink($next_post) ?>" class="list-group-item list-group-item-action flex-column align-items-start">
                                             <div class="w-100 justify-content-between">
-                                                <img src="upload/blog_square_03.jpg" alt="" class="img-fluid float-left">
-                                                <h5 class="mb-1">Let's make an introduction to the glorious world of history</h5>
+                                                <?php echo get_the_post_thumbnail($next_post, 'thumbnail') ?>
+                                                <h5 class="mb-1"><?php echo $next_post->post_title;?></h5>
                                                 <small>Next Post</small>
                                             </div>
                                         </a>
