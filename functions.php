@@ -2,10 +2,9 @@
 
 $base = get_template_directory_uri() . '/';
 
- if (!function_exists('wpc_load_assets')) {
-     function wpc_load_assets()
-     {
-        $base = get_template_directory_uri() . '/';
+if (!function_exists('wpc_load_assets')) {
+    function wpc_load_assets()
+    {
         global $base;
         wp_enqueue_style('wpc_bootstrap', $base . 'assets/css/bootstrap.css', [], null);
         wp_enqueue_style('wpc_fontawesome', $base . 'assets/css/font-awesome.min.css', ['wpc_bootstrap'], null);
@@ -34,3 +33,14 @@ function wpc_edit_content($content)
     return $content . '<p>Edited</p>';
 }
 add_filter('the_content', 'wpc_edit_content');
+
+
+
+
+
+if (!function_exists('wpc_register_sidebars')) {
+    function wpc_register_sidebars() {
+        register_sidebar();
+    }
+    add_action('widgets_init', 'wpc_register_sidebars');
+}
