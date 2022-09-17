@@ -109,7 +109,8 @@
                     'theme_location' => 'main-menu',
                     'container_id' => 'cloapediamenu',
                     'container_class' => 'collapse navbar-collapse justify-content-md-center',
-                    'menu_class' => 'navbar-nav'
+                    'menu_class' => 'navbar-nav',
+                    'walker' => new Wpc_Main_Menu_Walker
                 ]);
                 ?>
             </nav>
