@@ -34,6 +34,9 @@ if (!function_exists('wpc_setup')) {
         ]);
         add_theme_support('customize-selective-refresh-widgets');
         add_image_size('horizontal', 800, 460, true);
+        add_theme_support('html5', [
+            'comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'style', 'script'
+        ]);
     }
     add_action('after_setup_theme', 'wpc_setup');
 }
@@ -41,6 +44,15 @@ if (!function_exists('wpc_setup')) {
 add_filter('get_the_archive_title', function($title, $original_title, $prefix) {
     return $original_title;
 }, 10, 3);
+
+add_filter('comment_form_fields', function ($fields) {
+    return [
+        'author' => $fields['author'],
+        'email' => $fields['email'],
+        'url' => $fields['url'],
+        'comment' => $fields['comment'],
+    ];
+});
 
 require get_template_directory() . '/inc/widgets/widgets.php';
 require get_template_directory() . '/inc/walkers/walkers.php';

@@ -231,23 +231,7 @@ while(have_posts()) {
                             </div><!-- end col -->
                         </div><!-- end row -->
                     </div><!-- end custom-box -->
-
-                    <hr class="invis1">
-
-                    <div class="custombox clearfix">
-                        <h4 class="small-title">Leave a Reply</h4>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <form class="form-wrapper">
-                                    <input type="text" class="form-control" placeholder="Your name">
-                                    <input type="text" class="form-control" placeholder="Email address">
-                                    <input type="text" class="form-control" placeholder="Website">
-                                    <textarea class="form-control" placeholder="Your comment"></textarea>
-                                    <button type="submit" class="btn btn-primary">Submit Comment</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                    <?php comments_template(); ?>
                 </div><!-- end page-wrapper -->
             </div><!-- end col -->
 
