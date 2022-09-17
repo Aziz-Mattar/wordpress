@@ -4,8 +4,8 @@ if (!function_exists('wpc_register_sidebars')) {
     function wpc_register_sidebars() {
         register_sidebar([
             'id' => 'blog-sidebar',
-            'name' => 'Blog Sidebar',
-            'description' => 'This sidebar appears in single posts and blog page',
+            'name' => __('Blog Sidebar', 'wpc'),
+            'description' => __('This sidebar appears in single posts and blog page', 'wpc'),
             'class' => 'blog-sidebar',
             'before_widget' => '<div class="widget">',
             'after_widget' => '</div>',
@@ -15,7 +15,7 @@ if (!function_exists('wpc_register_sidebars')) {
         register_sidebars(3, [
             'id' => 'footer-area',
             'name' => 'Footer Area (%d)',
-            'description' => 'This sidebar is contained in a footer column',
+            'description' => __('This sidebar is contained in a footer column', 'wpc'),
             'before_widget' => '<div class="widget">',
             'after_widget' => '</div>',
             'before_title' => '<h2 class="widget-title">',

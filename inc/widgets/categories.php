@@ -6,9 +6,9 @@ class Wpc_Categories extends WP_Widget
     {
         parent::__construct(
             'wpc_categories_widget',
-            'WPC Categories',
+            __('WPC Categories', 'wpc'),
             [
-                'description' => 'This widget creates a categories list.',
+                'description' => __('This widget creates a categories list.', 'wpc'),
                 'customize_selective_refresh' => true,
             ]
         );
@@ -46,11 +46,11 @@ class Wpc_Categories extends WP_Widget
         if (isset($instance['title'])) {
             $title = $instance['title'];
         } else {
-            $title = 'Popular Categories';
+            $title = __('Popular Categories', 'wpc');
         }
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title') ?>">Widget Title</label>
+            <label for="<?php echo $this->get_field_id('title') ?>"><?php _e('Widget Title', 'wpc'); ?></label>
             <input type="text" name="<?php echo $this->get_field_name('title') ?>" id="<?php echo $this->get_field_id('title'); ?>" value="<?php echo esc_attr($title); ?>">
         </p>
         <?php

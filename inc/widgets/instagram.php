@@ -6,9 +6,9 @@ class Wpc_Instagram extends WP_Widget
     {
         parent::__construct(
             'wpc_instagram_widget',
-            'WPC Instagram',
+            __('WPC Instagram', 'wpc'),
             [
-                'description' => 'This widget allows you to embed Instagram Post',
+                'description' => __('This widget allows you to embed Instagram Post', 'wpc'),
                 'customize_selective_refresh' => true,
             ]
         );
@@ -28,20 +28,20 @@ class Wpc_Instagram extends WP_Widget
         if (isset($instance['title'])) {
             $title = $instance['title'];
         } else {
-            $title = 'Our Featured Post';
+            $title = __('Our Featured Post', 'wpc');
         }
         if (isset($instance['embedded_code'])) {
             $embedded_code = $instance['embedded_code'];
         } else {
-            $embedded_code = 'Please paste embedding code here';
+            $embedded_code = __('Please paste embedding code here', 'wpc');
         }
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title') ?>">Widget Title</label>
+            <label for="<?php echo $this->get_field_id('title') ?>"><?php _e('Widget Title', 'wpc'); ?></label>
             <input type="text" name="<?php echo $this->get_field_name('title') ?>" id="<?php echo $this->get_field_id('title') ?>" value="<?php echo esc_attr($title); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('embedded_code') ?>">Embedded Code</label>
+            <label for="<?php echo $this->get_field_id('embedded_code') ?>"><?php _e('Embedded Code', 'wpc'); ?></label>
             <textarea name="<?php echo $this->get_field_name('embedded_code'); ?>" id="<?php echo $this->get_field_id('embedded_code') ?>"><?php echo $embedded_code; ?></textarea>
         </p>
         <?php

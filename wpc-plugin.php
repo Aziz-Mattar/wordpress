@@ -38,6 +38,7 @@ if (!function_exists('wpc_register_post_types')) {
         register_post_type('wpc_ad', [
             'public' => true,
             'show_in_rest' => true,
+            'has_archive' => true,
             'supports' => ['title', 'editor', 'comments', 'excerpt', 'thumbnail', 'revisions'],
             'rewrite' => [
                 'slug' => __('ad', 'wpcourse'),

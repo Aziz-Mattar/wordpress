@@ -4,7 +4,7 @@ if (!function_exists('wpc_customize_register')) {
     function wpc_customize_register($wp_customize) {
         // Add section
         $wp_customize->add_section('footer_settings', [
-            'title' => 'Footer Settings',
+            'title' => __('Footer Settings', 'wpc'),
             'priority' => 115,
         ]);
 
@@ -23,7 +23,7 @@ if (!function_exists('wpc_customize_register')) {
         $wp_customize->add_control('footer_copy_rights', [
             'type' => 'text',
             'section' => 'footer_settings',
-            'label' => 'Copyrights Text',
+            'label' => __('Copyrights Text', 'wpc'),
         ]);
 
         // Footer Signature
@@ -36,7 +36,7 @@ if (!function_exists('wpc_customize_register')) {
         $wp_customize->add_control('footer_signature', [
             'type' => 'textarea',
             'section' => 'footer_settings',
-            'label' => 'Footer Signature',
+            'label' => __('Footer Signature', 'wpc'),
         ]);
 
         // Footer Background
@@ -47,7 +47,7 @@ if (!function_exists('wpc_customize_register')) {
             $wp_customize,
             'footer_image',
             [
-                'label' => 'Footer Image',
+                'label' => __('Footer Image', 'wpc'),
                 'section' => 'footer_settings',
                 'mime_type' => 'image',
             ]
@@ -61,7 +61,7 @@ if (!function_exists('wpc_customize_register')) {
             $wp_customize,
             'footer_color',
             [
-                'label' => 'Footer Color',
+                'label' => __('Footer Color', 'wpc'),
                 'section' => 'footer_settings',
             ]
         ));
@@ -95,7 +95,7 @@ function wpc_sanitize_footer_signature($footer_signature)
 function wpc_validate_footer_signature($validity, $footer_signature)
 {
     if (mb_strlen($footer_signature) > 100) {
-        $validity->add('invalid_footer_signature', 'Footer Signature is too long');
+        $validity->add('invalid_footer_signature', __('Footer Signature is too long', 'wpc'));
     }
     return $validity;
 }

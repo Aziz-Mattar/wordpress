@@ -5,9 +5,9 @@ class Wpc_Posts_List extends WP_Widget
     function __construct() {
         parent::__construct(
             'wpc_posts_list',
-            'WPC Posts List', 
+            __('WPC Posts List', 'wpc'), 
             [
-                'description' => 'This widget creates a posts list',
+                'description' => __('This widget creates a posts list', 'wpc'),
                 'customize_selective_refresh' => true,
             ]
         );
@@ -63,7 +63,7 @@ class Wpc_Posts_List extends WP_Widget
         if (isset($instance['title'])) {
             $title = $instance['title'];
         } else {
-            $title = 'Popular Posts';
+            $title = __('Popular Posts', 'wpc');
         }
         if (isset($instance['posts_count'])) {
             $posts_count = $instance['posts_count'];
@@ -87,32 +87,32 @@ class Wpc_Posts_List extends WP_Widget
         }
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>">Widget Title</label>
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Widget Title', 'wpc'); ?></label>
             <input type="text" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo esc_attr($title); ?>" id="<?php echo $this->get_field_id('title'); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('posts_count'); ?>">Posts Count</label>
+            <label for="<?php echo $this->get_field_id('posts_count'); ?>"><?php _e('Posts Count', 'wpc'); ?></label>
             <input type="number" name="<?php echo $this->get_field_name('posts_count'); ?>" value="<?php echo esc_attr($posts_count); ?>" min="1" id="<?php echo $this->get_field_id('posts_count'); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('alt_content'); ?>">Alt Content</label>
+            <label for="<?php echo $this->get_field_id('alt_content'); ?>"><?php _e('Alt Content', 'wpc'); ?></label>
             <select name="<?php echo $this->get_field_name('alt_content') ?>" id="<?php echo $this->get_field_id('alt_content'); ?>">
-                <option value="post_date" <?php echo ($alt_content == 'post_date') ? 'selected' : ''; ?>>Post date</option>
-                <option value="post_views" <?php echo ($alt_content == 'post_views') ? 'selected' : ''; ?>>Post views</option>
+                <option value="post_date" <?php echo ($alt_content == 'post_date') ? 'selected' : ''; ?>><?php _e('Post date', 'wpc'); ?></option>
+                <option value="post_views" <?php echo ($alt_content == 'post_views') ? 'selected' : ''; ?>><?php _e('Post views', 'wpc'); ?></option>
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('orderby'); ?>">Order By</label>
+            <label for="<?php echo $this->get_field_id('orderby'); ?>"><?php _e('Order By', 'wpc'); ?></label>
             <select name="<?php echo $this->get_field_name('orderby') ?>" id="<?php echo $this->get_field_id('orderby'); ?>">
-                <option value="post_date" <?php echo ($orderby == 'post_date') ? 'selected' : ''; ?>>Post date</option>
-                <option value="post_views" <?php echo ($orderby == 'post_views') ? 'selected' : ''; ?>>Post views</option>
+                <option value="post_date" <?php echo ($orderby == 'post_date') ? 'selected' : ''; ?>><?php _e('Post date', 'wpc'); ?></option>
+                <option value="post_views" <?php echo ($orderby == 'post_views') ? 'selected' : ''; ?>><?php _e('Post views', 'wpc'); ?></option>
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('order'); ?>">Order</label>
+            <label for="<?php echo $this->get_field_id('order'); ?>"><?php _e('Order', 'wpc'); ?></label>
             <select name="<?php echo $this->get_field_name('order') ?>" id="<?php echo $this->get_field_id('order'); ?>">
-                <option value="desc" <?php echo ($order == 'desc') ? 'selected' : ''; ?>>DESC</option>
-                <option value="asc" <?php echo ($order == 'asc') ? 'selected' : ''; ?>>ASC</option>
+                <option value="desc" <?php echo ($order == 'desc') ? 'selected' : ''; ?>><?php _e('DESC', 'wpc'); ?></option>
+                <option value="asc" <?php echo ($order == 'asc') ? 'selected' : ''; ?>><?php _e('ASC', 'wpc'); ?></option>
             </select>
         </p>
         <?php

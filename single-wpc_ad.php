@@ -22,12 +22,12 @@ while(have_posts()) {
                             <li class="breadcrumb-item active">The golden rules you need to know for a positive life</li>
                         </ol>
                         <?php 
-                        $categories = get_the_terms($post_id, 'category');
-                        if (is_array($categories)) {
-                            foreach($categories as $category) {
-                                echo '<span class="color-aqua"><a href="'.get_term_link($category).'" title="">'.$category->name.'</a></span>';
-                            }
-                        }
+                        // $categories = get_the_terms($post_id, 'category');
+                        // if (is_array($categories)) {
+                        //     foreach($categories as $category) {
+                        //         echo '<span class="color-aqua"><a href="'.get_term_link($category).'" title="">'.$category->name.'</a></span>';
+                        //     }
+                        // }
                         ?>
 
                         <h3><?php echo get_the_title(); ?></h3>
@@ -51,17 +51,6 @@ while(have_posts()) {
                     </div><!-- end content -->
 
                     <div class="blog-title-area">
-                        <div class="tag-cloud-single">
-                            <span><?php _e('Tags', 'wpc'); ?></span>
-                            <?php 
-                            $tags = get_the_terms($post_id, 'post_tag');
-                            if (is_array($tags)) {
-                                foreach($tags as $tag) {
-                                    echo '<small><a href="'.get_term_link($tag).'" title="">'.$tag->name.'</a></small>';
-                                }
-                            }
-                            ?>
-                        </div><!-- end meta -->
 
                         <?php get_template_part('partials/single-share', null, ['post_link' => $post_link]); ?>
                     </div><!-- end title -->
@@ -78,45 +67,6 @@ while(have_posts()) {
 
                     <hr class="invis1">
 
-                    <?php
-                    $next_post = get_next_post();
-                    $previous_post = get_previous_post();
-                    ?>
-                    <div class="custombox prevnextpost clearfix">
-                        <div class="row">
-                            <div class="col-lg-6">
-                            <?php if (is_object($previous_post)) { ?>
-                                <div class="blog-list-widget">
-                                    <div class="list-group">
-                                        <a href="<?php echo get_permalink($previous_post->ID) ?>" class="list-group-item list-group-item-action flex-column align-items-start">
-                                            <div class="w-100 justify-content-between text-right">
-                                                <?php echo get_the_post_thumbnail($previous_post, 'thumbnail'); ?>
-                                                <h5 class="mb-1"><?php echo $previous_post->post_title; ?></h5>
-                                                <small><?php _e('Previous Post', 'wpc'); ?></small>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                            </div><!-- end col -->
-
-                            <div class="col-lg-6">
-                            <?php if (is_object($next_post)) { ?>
-                                <div class="blog-list-widget">
-                                    <div class="list-group">
-                                        <a href="<?php echo get_permalink($next_post) ?>" class="list-group-item list-group-item-action flex-column align-items-start">
-                                            <div class="w-100 justify-content-between">
-                                                <?php echo get_the_post_thumbnail($next_post, 'thumbnail') ?>
-                                                <h5 class="mb-1"><?php echo $next_post->post_title;?></h5>
-                                                <small><?php _e('Next Post', 'wpc'); ?></small>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                            </div><!-- end col -->
-                        </div><!-- end row -->
-                    </div><!-- end author-box -->
 
                     <hr class="invis1">
 
@@ -143,49 +93,6 @@ while(have_posts()) {
                             </div><!-- end col -->
                         </div><!-- end row -->
                     </div><!-- end author-box -->
-
-                    <hr class="invis1">
-
-                    <div class="custombox clearfix">
-                        <h4 class="small-title"><?php _e('You may also like', 'wpc'); ?></h4>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="blog-box">
-                                    <div class="post-media">
-                                        <a href="single.html" title="">
-                                            <img src="upload/menu_06.jpg" alt="" class="img-fluid">
-                                            <div class="hovereffect">
-                                                <span class=""></span>
-                                            </div><!-- end hover -->
-                                        </a>
-                                    </div><!-- end media -->
-                                    <div class="blog-meta">
-                                        <h4><a href="single.html" title="">We are guests of ABC Design Studio</a></h4>
-                                        <small><a href="blog-category-01.html" title="">Trends</a></small>
-                                        <small><a href="blog-category-01.html" title="">21 July, 2017</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-                            </div><!-- end col -->
-
-                            <div class="col-lg-6">
-                                <div class="blog-box">
-                                    <div class="post-media">
-                                        <a href="single.html" title="">
-                                            <img src="upload/menu_07.jpg" alt="" class="img-fluid">
-                                            <div class="hovereffect">
-                                                <span class=""></span>
-                                            </div><!-- end hover -->
-                                        </a>
-                                    </div><!-- end media -->
-                                    <div class="blog-meta">
-                                        <h4><a href="single.html" title="">Nostalgia at work with family</a></h4>
-                                        <small><a href="blog-category-01.html" title="">News</a></small>
-                                        <small><a href="blog-category-01.html" title="">20 July, 2017</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-                            </div><!-- end col -->
-                        </div><!-- end row -->
-                    </div><!-- end custom-box -->
 
                     <hr class="invis1">
 

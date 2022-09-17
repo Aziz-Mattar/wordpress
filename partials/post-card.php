@@ -24,7 +24,7 @@ $post_categories = get_the_terms($post_id, 'category');
             ?>
             
             <h4><a href="<?php echo $post_link; ?>" title="<?php echo $post_title; ?>"><?php echo $post_title; ?></a></h4>
-            <small><a href="<?php echo get_author_posts_url(get_the_author_meta('ID')) ?>" title="">By: <?php echo get_the_author_meta('display_name'); ?></a></small>
+            <small><a href="<?php echo get_author_posts_url(get_the_author_meta('ID')) ?>" title=""><?php _e('By', 'wpc'); ?>: <?php echo get_the_author_meta('display_name'); ?></a></small>
             <small><a href="<?php echo get_month_link(get_the_date('Y'), get_the_date('m')) ?>" title=""><?php echo get_the_date('d M, Y') ?></a></small>
         </div><!-- end meta -->
     </div><!-- end blog-box -->

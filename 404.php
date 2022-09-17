@@ -28,9 +28,9 @@ get_header();
                         <div class="row">
                             <div class="col-md-8 offset-md-2 text-center">
                                 <h2>404</h2>
-                                <h3>Oh no! Page Not Found</h3>
-                                <p>The page you are looking for no longer exists. Perhaps you can return back to the site's homepage and see if you can find what you are looking for. Or, you can try finding it with the information below.</p>
-                                <a href="#" class="btn btn-primary">Back to Home</a>
+                                <h3><?php _e('Oh no! Page Not Found', 'wpc'); ?></h3>
+                                <p><?php _e("The page you are looking for no longer exists. Perhaps you can return back to the site's homepage and see if you can find what you are looking for. Or, you can try finding it with the information below.", 'wpc'); ?></p>
+                                <a href="#" class="btn btn-primary"><?php _e('Back to Home', 'wpc'); ?></a>
                             </div>
                         </div>
                     </div>

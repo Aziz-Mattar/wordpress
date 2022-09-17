@@ -172,7 +172,7 @@ class Wpc_Top_Menu_Edit_Walker extends Walker_Nav_Menu {
 				</p>
 				<p class="field-icon description description-thin">
 					<label for="edit-menu-item-icon-<?php echo $item_id; ?>">
-						<?php _e( 'Icon' ); ?><br />
+						<?php _e( 'Icon', 'wpc' ); ?><br />
 						<input type="text" id="edit-menu-item-icon-<?php echo $item_id; ?>" class="widefat code edit-menu-item-icon" name="menu-item-icon[<?php echo $item_id; ?>]" value="<?php echo esc_attr( $item->icon ); ?>" />
 					</label>
 				</p>

@@ -25,8 +25,8 @@ if (!function_exists('wpc_setup')) {
     {
         add_theme_support('post-thumbnails');
         register_nav_menus([
-            'top-menu' => 'Top Menu',
-            'main-menu' => 'Main Menu',
+            'top-menu' => __('Top Menu', 'wpc'),
+            'main-menu' => __('Main Menu', 'wpc'),
         ]);
         add_theme_support('custom-logo', [
             'width' => 300,

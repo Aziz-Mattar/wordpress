@@ -43,23 +43,23 @@ while (have_posts()) {
                     $attachment_caption = wp_get_attachment_caption($attachment_id);
                     if (!empty($attachment_caption)) {
                     ?>
-                    <h4>What is this</h4>
+                    <h4><?php _e('What is this', 'wpc'); ?></h4>
                     <p><?php echo $attachment_caption; ?></p>
                     <?php } ?>
                     <!-- Description //-->
                     <?php if(!empty(get_the_content())) { ?>
-                    <h4>About the file</h4>
+                    <h4><?php _e('About the file', 'wpc'); ?></h4>
                     <div class="blog-content"><?php the_content(); ?></div>
                     <?php } ?>
                     <!-- Meta //-->
-                    <h4>File Meta Data</h4>
+                    <h4><?php _e('File Meta Data', 'wpc'); ?></h4>
                     
                     <table class="table">
                         <?php
                         foreach ($attachment_meta as $key => $value) {
                             $value = ($key == 'filesize') ? size_format($value, 2) : $value;
                             echo '<tr>';
-                            echo '<td>' . ucwords(str_replace('_', ' ', $key)) . '</td>';
+                            echo '<td>' . __(ucwords(str_replace('_', ' ', $key)), 'wpc') . '</td>';
                             echo '<td>' . $value . '</td>';
                             echo '</tr>';
                         }

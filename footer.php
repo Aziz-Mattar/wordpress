@@ -40,7 +40,7 @@
                             <div class="newsletter-widget text-center">
                                 <form class="form-inline">
                                     <input type="text" class="form-control" placeholder="Enter your email address">
-                                    <button type="submit" class="btn btn-primary">Subscribe <i class="fa fa-envelope-open-o"></i></button>
+                                    <button type="submit" class="btn btn-primary"><?php _e('Subscribe', 'wpc'); ?> <i class="fa fa-envelope-open-o"></i></button>
                                 </form>
                             </div><!-- end newsletter -->
                         </div><!-- end footer-text -->
@@ -56,7 +56,7 @@
         </div><!-- end container -->
     </footer><!-- end footer -->
 
-    <div class="dmtop">Scroll to Top</div>
+    <div class="dmtop"><?php _e('Scroll to Top', 'wpc'); ?></div>
     
 </div><!-- end wrapper -->
     <?php wp_footer(); ?>

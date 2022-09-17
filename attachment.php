@@ -45,27 +45,27 @@ while (have_posts()) {
                     <?php } ?>
                     <!-- Description //-->
                     <?php if(!empty(get_the_content())) { ?>
-                    <h4>About the picture</h4>
+                    <h4><?php _e('About the picture', 'wpc') ?></h4>
                     <div class="blog-content"><?php the_content(); ?></div>
                     <?php } ?>
                     <!-- Meta //-->
-                    <h4>Picture Information</h4>
+                    <h4><?php _e('Picture Information', 'wpc'); ?></h4>
                     <?php $attachment_meta = wp_get_attachment_metadata($attachment_id); ?>
                     <table class="table">
                         <tr>
-                            <td>Dimension</td>
+                            <td><?php _e('Dimension', 'wpc'); ?></td>
                             <td><?php echo $attachment_meta['width'] . 'x' . $attachment_meta['height']; ?></td>
                         </tr>
                         <tr>
-                            <td>Size</td>
+                            <td><?php _e('Size', 'wpc'); ?></td>
                             <td><?php echo size_format(filesize(get_attached_file($attachment_id)), 2); ?></td>
                         </tr>
                         <tr>
-                            <td>Thumbnails</td>
+                            <td><?php _e('Thumbnails', 'wpc'); ?></td>
                             <td>
                                 <?php
                                 foreach ($attachment_meta['sizes'] as $size => $info) {
-                                    echo '<p>'.ucwords(str_replace('_', ' ', $size)).' :'.$info['width'].'x'.$info['height'].'</p>';
+                                    echo '<p>'.__(ucwords(str_replace('_', ' ', $size)), 'wpc').' :'.$info['width'].'x'.$info['height'].'</p>';
                                 }
                                 ?>
                             </td>
@@ -73,7 +73,7 @@ while (have_posts()) {
                         <?php
                         foreach ($attachment_meta['image_meta'] as $key => $value) {
                             echo '<tr>';
-                            echo '<td>' . ucwords(str_replace('_', ' ', $key)) . '</td>';
+                            echo '<td>' . __(ucwords(str_replace('_', ' ', $key)), 'wpc') . '</td>';
                             echo '<td>' . $value . '</td>';
                             echo '</tr>';
                         }
