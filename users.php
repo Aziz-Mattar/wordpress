@@ -11,7 +11,13 @@ if (!function_exists('wpc_add_roles')) {
             'delete_ads' => true,
             'edit_ads' => true,
             'upload_files' => true,
+            'assign_ad_groups' => true,
         ]);
+        $admin = get_role('administrator');
+        $admin->remove_cap('manage_ad_groups');
+        $admin->remove_cap('delete_ad_groups');
+        $admin->remove_cap('edit_ad_groups');
+        $admin->remove_cap('assign_ad_groups');
     }
 }
 

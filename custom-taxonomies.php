@@ -4,6 +4,12 @@ if (!function_exists('wpc_register_taxonomies')) {
     function wpc_register_taxonomies()
     {
         register_taxonomy('wpc_ad_group', ['wpc_ad'], [
+            'capabilities' => [
+                'manage_terms' => 'manage_ad_groups',
+                'delete_terms' => 'delete_ad_groups',
+                'edit_terms' => 'edit_ad_groups',
+                'assign_terms' => 'assign_ad_groups',
+            ],
             'labels' => [
                 'name'                       => __( 'Groups', 'wpcourse' ),
                 'singular_name'              => __( 'Group', 'wpcourse' ),
@@ -28,6 +34,11 @@ if (!function_exists('wpc_register_taxonomies')) {
             ],
             'show_in_rest' => true,
         ]);
+        $administrator = get_role('administrator');
+        $administrator->add_cap('manage_ad_groups');
+        $administrator->add_cap('delete_ad_groups');
+        $administrator->add_cap('edit_ad_groups');
+        $administrator->add_cap('assign_ad_groups');
     }
     add_action('init', 'wpc_register_taxonomies');
 }
