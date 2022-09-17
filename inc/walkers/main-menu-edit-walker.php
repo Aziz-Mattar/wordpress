@@ -1,6 +1,6 @@
 <?php
 
-class Wpc_Top_Menu_Edit_Walker extends Walker_Nav_Menu {
+class Wpc_Main_Menu_Edit_Walker extends Walker_Nav_Menu {
 
 	public function start_lvl( &$output, $depth = 0, $args = null ) {}
 
@@ -174,6 +174,21 @@ class Wpc_Top_Menu_Edit_Walker extends Walker_Nav_Menu {
 					<label for="edit-menu-item-icon-<?php echo $item_id; ?>">
 						<?php _e( 'Icon' ); ?><br />
 						<input type="text" id="edit-menu-item-icon-<?php echo $item_id; ?>" class="widefat code edit-menu-item-icon" name="menu-item-icon[<?php echo $item_id; ?>]" value="<?php echo esc_attr( $item->icon ); ?>" />
+					</label>
+				</p>
+				<p class="field-color description description-thin">
+					<label for="edit-menu-item-color-<?php echo $item_id; ?>">
+						<?php _e( 'Color' ); ?><br />
+                        <select name="menu-item-color[<?php echo $item_id; ?>]" class="widefat code edit-menu-item-color" id="edit-menu-item-color-<?php echo $item_id; ?>">
+                        <?php
+                        $colors = ['', 'pink', 'red', 'aqua', 'green', 'yellow', 'grey'];
+                        foreach ($colors as $color) {
+                            echo '<option value="'.esc_attr($color).'"';
+                            echo ($color == $item->color) ? ' selected="selected"' : '';
+                            echo '>'.ucfirst($color).'</option>';
+                        }
+                        ?>
+                        </select>
 					</label>
 				</p>
 				<p class="field-description description description-wide">
