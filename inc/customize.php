@@ -65,6 +65,27 @@ if (!function_exists('wpc_customize_register')) {
                 'section' => 'footer_settings',
             ]
         ));
+        // Default Color
+        $wp_customize->add_setting('default_color', [
+            'default' => 'aqua',
+            'sanitize_callback' => function($value) {
+                return in_array($value, ['aqua', 'green', 'grey', 'pink', 'red', 'yellow']) ?
+                    $value : 'aqua';
+            }
+        ]);
+        $wp_customize->add_control('default_color', [
+            'type' => 'select',
+            'section' => 'title_tagline',
+            'label' => __('Default Color', 'wpc'),
+            'choices' => [
+                'aqua' => __('Aqua', 'wpc'),
+                'green' => __('Green', 'wpc'),
+                'grey' => __('Grey', 'wpc'),
+                'pink' => __('Pink', 'wpc'),
+                'red' => __('Red', 'wpc'),
+                'yellow' => __('Yellow', 'wpc'),
+            ]
+        ]);
     }
     add_action('customize_register', 'wpc_customize_register');
 }

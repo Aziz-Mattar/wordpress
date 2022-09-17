@@ -22,3 +22,8 @@ iframe.instagram-media {
     width: 100% !important;
     min-width: auto !important;
 }
+
+.blog-title-area span {
+    margin:.5rem .5rem .5rem 0;
+    display:inline-block
+}

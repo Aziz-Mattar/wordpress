@@ -2,7 +2,7 @@
 
 get_header();
 
-get_template_part('partials/archive-title');
+get_template_part('partials/main-title');
 
 if (have_posts()) { ?>
 <section class="section wb">

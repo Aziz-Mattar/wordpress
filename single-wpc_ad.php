@@ -47,6 +47,11 @@ while(have_posts()) {
                     <div class="blog-content">  
                         <?php the_content(); ?>
                     </div><!-- end content -->
+                    <?php
+                    if (!empty($post_meta['wpc_ad_url'][0])) {
+                        echo '<h4><a href="'.esc_url($post_meta['wpc_ad_url'][0]).'">'.__('Click Here', 'wpc').'</a></h4>';
+                    }
+                    ?>
 
                     <div class="blog-title-area">
 
