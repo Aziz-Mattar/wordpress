@@ -193,7 +193,7 @@ class Wpc_Main_Menu_Edit_Walker extends Walker_Nav_Menu {
                         foreach ($colors as $color) {
                             echo '<option value="'.esc_attr($color).'"';
                             echo ($color == $item->color) ? ' selected="selected"' : '';
-                            echo '>'.ucfirst($color).'</option>';
+                            echo '>'.__(ucfirst($color), 'wpc').'</option>';
                         }
                         ?>
                         </select>

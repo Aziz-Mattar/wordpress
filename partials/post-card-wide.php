@@ -2,6 +2,7 @@
 $post_id = get_the_ID();
 $post_link = get_permalink();
 $post_title = get_the_title();
+$post_categories = get_the_terms($post_id, 'wpc_ad_group');
 ?>
 
 <div class="blog-box row">
@@ -17,7 +18,14 @@ $post_title = get_the_title();
     <div class="blog-meta big-meta col-md-8">
         <h4><a href="<?php echo esc_url($post_link); ?>" title=""><?php echo $post_title; ?></a></h4>
         <p><?php the_excerpt(); ?></p>
-        <small><a href="blog-category-01.html" title="">Food</a></small>
+        <?php
+        if (is_array($post_categories)) {
+            foreach ($post_categories as $category) {
+                echo '<span class="bg-grey"><a href="'.get_term_link($category).'" title="">'.$category->name.'</a></span> ';
+            }
+            echo '/ ';
+        }
+        ?>
         <small><a href="<?php echo esc_url($post_link); ?>" title=""><?php echo get_the_date('d M, Y'); ?></a></small>
         <small><a href="<?php echo esc_url(get_author_posts_url(get_the_author_meta('ID'))); ?>" title="">
             <?php echo __('By', 'wpc') . ' ' . get_the_author_meta('display_name'); ?>

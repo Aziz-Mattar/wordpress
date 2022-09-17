@@ -22,12 +22,12 @@ while(have_posts()) {
                             <li class="breadcrumb-item active">The golden rules you need to know for a positive life</li>
                         </ol>
                         <?php 
-                        // $categories = get_the_terms($post_id, 'category');
-                        // if (is_array($categories)) {
-                        //     foreach($categories as $category) {
-                        //         echo '<span class="color-aqua"><a href="'.get_term_link($category).'" title="">'.$category->name.'</a></span>';
-                        //     }
-                        // }
+                        $categories = get_the_terms($post_id, 'wpc_ad_group');
+                        if (is_array($categories)) {
+                            foreach($categories as $category) {
+                                echo '<span class="color-aqua"><a href="'.get_term_link($category).'" title="">'.$category->name.'</a></span>';
+                            }
+                        }
                         ?>
 
                         <h3><?php echo get_the_title(); ?></h3>
