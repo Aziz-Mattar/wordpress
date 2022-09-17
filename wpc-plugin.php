@@ -26,6 +26,7 @@ if (!function_exists('wpc_load_wpcourse_translation')) {
 if (!function_exists('wpc_on_activate_plugin')) {
     function wpc_on_activate_plugin()
     {
+        wpc_add_roles();
         wpc_register_post_types();
         wpc_register_taxonomies();
         flush_rewrite_rules();
@@ -37,3 +38,4 @@ require plugin_dir_path(__FILE__) . 'custom-post-types.php';
 require plugin_dir_path(__FILE__) . 'custom-taxonomies.php';
 require plugin_dir_path(__FILE__) . 'metaboxes.php';
 require plugin_dir_path(__FILE__) . 'taxonomies-fields.php';
+require plugin_dir_path(__FILE__) . 'users.php';
