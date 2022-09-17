@@ -17,6 +17,7 @@ if (!function_exists('wpc_load_assets')) {
         wp_enqueue_script('wpc_bootstrap', $base . 'assets/js/bootstrap.min.js', [], null, true);
         wp_enqueue_script('wpc_masonry', $base . 'assets/js/masonry.js', [], null, true);
         wp_enqueue_script('wpc_custom', $base . 'assets/js/custom.js', [], null, true);
+        wp_enqueue_script('comment-reply');
     }
     add_action('wp_enqueue_scripts', 'wpc_load_assets');
 }
@@ -53,6 +54,39 @@ add_filter('comment_form_fields', function ($fields) {
         'comment' => $fields['comment'],
     ];
 });
+
+if (!function_exists('wpc_comment_callback')) {
+    function wpc_comment_callback($comment, $args, $depth)
+    {
+        ?>
+        <div <?php comment_class('media'); ?> id="comment-<?php echo $comment->comment_ID ?>">
+            <a class="media-left" href="#">
+                <?php echo get_avatar($comment, $args['avatar_size'], false, false, ['class' => 'rounded-circle']) ?>
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading user_name">
+                <?php echo get_comment_author_link($comment); ?> 
+                <small><?php printf(
+                    /* translators: %s is a time difference */
+                    __('%s ago', 'wpc'),
+                    human_time_diff(get_comment_time('U'), current_time('U'))
+                ); ?></small></h4>
+                <?php
+                if ($comment->comment_approved == 0) {
+                    echo '<p>'.__('Your comment is awaiting moderation', 'wpc').'</p>';
+                }
+                ?>
+                <p><?php comment_text(); ?></p>
+                <!-- <a href="#" class="btn btn-primary btn-sm">Reply</a> -->
+                <?php comment_reply_link([
+                    'depth' => $depth,
+                    'max_depth' => $args['max_depth'],
+                    'reply_text' => __('Reply', 'wpc'),
+                ]); ?>
+            </div>
+        <?php
+    }
+}
 
 require get_template_directory() . '/inc/widgets/widgets.php';
 require get_template_directory() . '/inc/walkers/walkers.php';
