@@ -51,6 +51,7 @@ while (have_posts()) {
                         }
                         ?>
                     </table>
+                    <?php comments_template(); ?>
                 </div>
             </div>
         </div>
