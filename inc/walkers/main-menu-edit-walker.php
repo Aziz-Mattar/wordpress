@@ -176,6 +176,14 @@ class Wpc_Main_Menu_Edit_Walker extends Walker_Nav_Menu {
 						<input type="text" id="edit-menu-item-icon-<?php echo $item_id; ?>" class="widefat code edit-menu-item-icon" name="menu-item-icon[<?php echo $item_id; ?>]" value="<?php echo esc_attr( $item->icon ); ?>" />
 					</label>
 				</p>
+				<?php if ($depth == 0) { ?>
+				<p class="field-mega-menu description description-thin">
+					<label for="edit-menu-item-mega-menu-<?php echo $item_id; ?>">
+						<?php _e( 'Mega Menu' ); ?><br />
+						<input <?php if ($item->mega_menu == 1) echo 'checked'; ?> type="checkbox" id="edit-menu-item-mega-menu-<?php echo $item_id; ?>" class="widefat code edit-menu-item-mega-menu" name="menu-item-mega-menu[<?php echo $item_id; ?>]" value="1" />
+					</label>
+				</p>
+				<?php } ?>
 				<p class="field-color description description-thin">
 					<label for="edit-menu-item-color-<?php echo $item_id; ?>">
 						<?php _e( 'Color' ); ?><br />

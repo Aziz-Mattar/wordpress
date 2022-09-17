@@ -51,13 +51,13 @@ function openCategory(evt, catName) {
     var i, tabcontent, tablinks;
 
     // Get all elements with class="tabcontent" and hide them
-    tabcontent = document.getElementsByClassName("tabcontent");
+    tabcontent = $(evt.target).parents('div.mega-menu-content').find('.tabcontent').get();
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
 
     // Get all elements with class="tablinks" and remove the class "active"
-    tablinks = document.getElementsByClassName("tablinks");
+    tablinks = $(evt.target).parents('div.mega-menu-content').find('.tablinks').get();
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }

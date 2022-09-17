@@ -20,15 +20,16 @@ class Wpc_Main_Menu_Walker extends Walker_Nav_Menu {
 		// Default class.
 		$classes = array( 'dropdown-menu' );
 		$class_names = implode( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
-		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+        $class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+        $lebelledby = ($depth == 0) ? ' aria-lebelledby="dropdown_'.$this->dropdown_id.'"' : '';
         if ($this->in_mega_menu) {
             if ($depth == 1) {
                 $is_active = $this->current_tab == 1 ? 'active' : '';
-                $this->tabs_content .= '<div id="cat_'.$this->current_tab.'" class="tabcontent '.$is_active.'">';
+                $this->tabs_content .= '<div id="cat_'.$this->mega_id.'_'.$this->current_tab.'" class="tabcontent '.$is_active.'">';
                 $this->tabs_content .= '<div class="row">';
             }
         } else {
-            $output .= "{$n}{$indent}<ul$class_names>{$n}";
+            $output .= "{$n}{$indent}<ul$class_names $lebelledby>{$n}";
         }
 		
     }
@@ -62,8 +63,10 @@ class Wpc_Main_Menu_Walker extends Walker_Nav_Menu {
 		$indent = ( $depth ) ? str_repeat( $t, $depth ) : '';
 
         $classes   = empty( $item->classes ) ? array() : (array) $item->classes;
-        if (in_array('menu-large', $classes)) {
+        if ($item->mega_menu == '1') {
             $this->in_mega_menu = true;
+            $classes[] = 'menu-large hidden-md-down hidden-sm-down hidden-xs-down';
+            $this->mega_id = $item->ID;
         }
         $classes[] = 'menu-item-' . $item->ID;
         if ($depth == 0) {
@@ -105,6 +108,11 @@ class Wpc_Main_Menu_Walker extends Walker_Nav_Menu {
             }
             if ($args->walker->has_children) {
                 $atts['class'] .= ' dropdown-toggle';
+                $atts['data-toggle'] = 'dropdown';
+                $atts['aria-haspopup'] = 'true';
+                $atts['aria-expanded'] = 'false';
+                $atts['id'] = 'dropdown_' . $item->ID;
+                $this->dropdown_id = $item->ID;
             }
         }
         if ($depth > 0) {
@@ -141,7 +149,7 @@ class Wpc_Main_Menu_Walker extends Walker_Nav_Menu {
         if ($this->in_mega_menu && $depth > 0) {
             if ($depth == 1) {
                 $is_active = $this->current_tab == 1 ? 'active' : '';
-                $this->tabs_labels .= '<button class="tablinks '.$is_active.'" onclick="openCategory(event, \'cat_'.$this->current_tab.'\')">'.$title.'</button>';
+                $this->tabs_labels .= '<button class="tablinks '.$is_active.'" onclick="openCategory(event, \'cat_'.$this->mega_id.'_'.$this->current_tab.'\')">'.$title.'</button>';
             } elseif ($depth == 2) {
                 $object_categories = get_the_category($item->object_id);
                 if (is_array($object_categories)) {
@@ -181,12 +189,15 @@ class Wpc_Main_Menu_Walker extends Walker_Nav_Menu {
         }
         if ($this->in_mega_menu) {
             if ($depth == 0) {
-                $output .= '<ul class="dropdown-menu megamenu"><li><div class="mega-menu-content clearfix">';
+                $output .= '<ul aria-lebelledby="dropdown_'.$this->dropdown_id.'" class="dropdown-menu megamenu"><li><div class="mega-menu-content clearfix">';
                 $output .= '<div class="tab">' . $this->tabs_labels . '</div>';
                 $output .= '<div class="tab-details clearfix">' . $this->tabs_content . '</div>';
                 $output .= '</div></li></ul>';
                 $output .= "</li>{$n}";
                 $this->in_mega_menu = false;
+                $this->tabs_content = '';
+                $this->tabs_labels = '';
+                $this->current_tab = 1;
             } elseif ($depth == 1) {
                 $this->current_tab++;
             }
