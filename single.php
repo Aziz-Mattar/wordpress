@@ -122,20 +122,28 @@ while(have_posts()) {
                         <h4 class="small-title"><?php _e('About author', 'wpc'); ?></h4>
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                <img src="upload/author.jpg" alt="" class="img-fluid rounded-circle"> 
+                                <?php echo get_avatar(get_the_author_meta('ID'), 90, false, false, ['class' => 'img-fluid rounded-circle']) ?>
                             </div><!-- end col -->
 
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                <h4><a href="#"><?php echo get_the_author_meta('display_name'); ?></a></h4>
+                                <h4><?php the_author_link(); ?></h4>
                                 <p><?php echo get_the_author_meta('description'); ?></p>
 
                                 <div class="topsocial">
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Youtube"><i class="fa fa-youtube"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Website"><i class="fa fa-link"></i></a>
+                                <?php
+                                $networks = ['facebook', 'twitter', 'instagram', 'youtube', 'pinterest'];
+                                foreach ($networks as $network) {
+                                    $link = get_the_author_meta('wpc_' . $network . '_link');
+                                    if (!empty($link)) {
+                                        echo '<a href="'.esc_url($link).'" data-toggle="tooltip" data-placement="bottom" title="'.ucfirst($network).'"><i class="fa fa-'.$network.'"></i></a>';
+                                    }
+                                }
+                                $author_url = get_the_author_meta('url');
+                                if (!empty($author_url)) {
+                                    echo '<a href="'.esc_url($author_url).'" data-toggle="tooltip" data-placement="bottom" title="Website"><i class="fa fa-link"></i></a>';
+                                }
+                                ?>
+                                
                                 </div><!-- end social -->
 
                             </div><!-- end col -->
