@@ -27,3 +27,29 @@ iframe.instagram-media {
     margin:.5rem .5rem .5rem 0;
     display:inline-block
 }
+.comment.depth-1 {
+    flex-wrap:wrap;
+}
+.comment.depth-2,
+.comment.depth-3 {
+    flex: 1 0 calc(100% - 110px);
+    padding:10;
+    margin-top:10px;
+    margin-left: 100px;
+    flex-wrap:wrap;
+}
+@media screen and (max-width:768px) {
+    .comments-list img {
+        width:30px;
+        height:30px;
+        margin-right:12px
+    }
+    .comment.depth-2,
+    .comment.depth-3 {
+        flex: 1 0 calc(100% - 42px);
+        margin-left:42px;
+    }
+}
+.comment #respond {
+    width: 100%;
+}

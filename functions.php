@@ -59,11 +59,11 @@ if (!function_exists('wpc_comment_callback')) {
     function wpc_comment_callback($comment, $args, $depth)
     {
         ?>
-        <div <?php comment_class('media'); ?> id="comment-<?php echo $comment->comment_ID ?>">
+        <div <?php comment_class('media'); ?> id="comment-<?php echo $comment->comment_ID; ?>">
             <a class="media-left" href="#">
                 <?php echo get_avatar($comment, $args['avatar_size'], false, false, ['class' => 'rounded-circle']) ?>
             </a>
-            <div class="media-body">
+            <div class="media-body" id="comment-body-<?php echo $comment->comment_ID; ?>">
                 <h4 class="media-heading user_name">
                 <?php echo get_comment_author_link($comment); ?> 
                 <small><?php printf(
@@ -71,22 +71,23 @@ if (!function_exists('wpc_comment_callback')) {
                     __('%s ago', 'wpc'),
                     human_time_diff(get_comment_time('U'), current_time('U'))
                 ); ?></small></h4>
-                <?php
-                if ($comment->comment_approved == 0) {
-                    echo '<p>'.__('Your comment is awaiting moderation', 'wpc').'</p>';
-                }
-                ?>
                 <p><?php comment_text(); ?></p>
-                <!-- <a href="#" class="btn btn-primary btn-sm">Reply</a> -->
-                <?php comment_reply_link([
+                <?php 
+                comment_reply_link([
                     'depth' => $depth,
                     'max_depth' => $args['max_depth'],
                     'reply_text' => __('Reply', 'wpc'),
-                ]); ?>
+                    'add_below' => 'comment-body',
+                ]);
+                ?>
             </div>
         <?php
     }
 }
+
+add_filter('comment_reply_link', function($link) {
+    return str_replace("class='", "class='btn btn-primary btn-sm ", $link);
+});
 
 require get_template_directory() . '/inc/widgets/widgets.php';
 require get_template_directory() . '/inc/walkers/walkers.php';
