@@ -28,8 +28,4 @@ if (!function_exists('wpc_setup')) {
     add_action('after_setup_theme', 'wpc_setup');
 }
 
-
-
-
-
 require get_template_directory() . '/inc/widgets/widgets.php';

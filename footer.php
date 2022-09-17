@@ -3,84 +3,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                    <div class="widget">
-                        <h2 class="widget-title">Recent Posts</h2>
-                        <div class="blog-list-widget">
-                            <div class="list-group">
-                            <?php
-                            $recent_posts = get_posts([
-                                'numberposts' => 3
-                            ]);
-                            foreach ($recent_posts as $post) {
-                                ?>
-                                <a href="<?php echo get_permalink($post); ?>" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="w-100 justify-content-between">
-                                        <?php echo get_the_post_thumbnail($post, 'thumbnail', ['class' => 'float-left img-fluid']); ?>
-                                        <h5 class="mb-1"><?php echo $post->post_title; ?></h5>
-                                        <small><?php echo get_the_date('d M, Y', $post->ID); ?></small>
-                                    </div>
-                                </a>
-                                <?php
-                            }
-                            ?>
-                            </div>
-                        </div><!-- end blog-list -->
-                    </div><!-- end widget -->
+                    <?php dynamic_sidebar('footer-area'); ?>
                 </div><!-- end col -->
 
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                    <div class="widget">
-                        <h2 class="widget-title">Popular Posts</h2>
-                        <div class="blog-list-widget">
-                            <div class="list-group">
-                            <?php 
-                            $popular_posts = get_posts([
-                                'numberposts' => 3,
-                                'orderby' => 'meta_value_num',
-                                'meta_key' => 'wpc_post_views',
-                                'order' => 'DESC',
-                            ]);
-                            foreach($popular_posts as $post) {
-                                ?>
-                                <a href="<?php echo get_permalink($post); ?>" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="w-100 justify-content-between">
-                                        <?php echo get_the_post_thumbnail($post, 'thumbnail', ['class' => 'img-fluid float-left']) ?>
-                                        <h5 class="mb-1"><?php echo $post->post_title; ?></h5>
-                                        <small>
-                                            <i class="fa fa-eye"></i> <?php echo ((int)(get_post_meta($post->ID, 'wpc_post_views', true))); ?>
-                                        </small>
-                                    </div>
-                                </a>
-
-                                <?php
-                            }
-                            ?>
-                            </div>
-                        </div><!-- end blog-list -->
-                    </div><!-- end widget -->
+                    <?php dynamic_sidebar('footer-area-2'); ?>
                 </div><!-- end col -->
 
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                    <div class="widget">
-                        <h2 class="widget-title">Popular Categories</h2>
-                        <div class="link-widget">
-                            <ul>
-                            <?php 
-                            $popular_categories = get_terms([
-                                'taxonomy' => 'category',
-                                'orderby' => 'count',
-                                'order' => 'DESC',
-                                'hide_empty' => true
-                            ]);
-                            if (is_array($popular_categories)) {
-                                foreach ($popular_categories as $category) {
-                                    echo '<li><a href="'.get_term_link($category).'">'.$category->name.' <span>('.$category->count.')</span></a></li>';
-                                }
-                            }
-                            ?>
-                            </ul>
-                        </div><!-- end link-widget -->
-                    </div><!-- end widget -->
+                    <?php dynamic_sidebar('footer-area-3'); ?>
                 </div><!-- end col -->
             </div><!-- end row -->
 

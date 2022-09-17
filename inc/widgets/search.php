@@ -62,7 +62,3 @@ class Wpc_Search extends WP_Widget
         return $new_data;
     }
 }
-
-add_action('widgets_init', function() {
-    register_widget('Wpc_Search');
-});

@@ -1,9 +1,9 @@
 <?php 
 
-class Wpc_Popular_Posts extends WP_Widget
+class Wpc_Posts_List extends WP_Widget
 {
     function __construct() {
-        parent::__construct('wpc_popular_posts', 'WPC Popular Posts', ['description' => 'This widget creates a posts list ordered by post views']);
+        parent::__construct('wpc_posts_list', 'WPC Posts List', ['description' => 'This widget creates a posts list']);
     }
 
     function widget($args, $instance) {
@@ -12,12 +12,20 @@ class Wpc_Popular_Posts extends WP_Widget
         if (!empty($title)) {
             echo $args['before_title'] . $title . $args['after_title'];
         }
-        $popular_posts = get_posts([
-            'orderby' => 'meta_value_num',
-            'meta_key' => 'wpc_post_views',
-            'order' => 'desc',
-            'numberposts' => (isset($instance['posts_count'])) ? $instance['posts_count'] : 4,
-        ]);
+        $options = [];
+        if (isset($instance['orderby']) && $instance['orderby'] == 'post_views') {
+            $options['orderby'] = 'meta_value_num';
+            $options['meta_key'] = 'wpc_post_views';
+        } elseif (isset($instance['orderby']) && $instance['orderby'] == 'post_date') {
+            $options['orderby'] = 'date';
+        }
+        if (isset($instance['order'])) {
+            $options['order'] = $instance['order'];
+        }
+        if (isset($instance['posts_count'])) {
+            $options['numberposts'] = $instance['posts_count'];
+        }
+        $popular_posts = get_posts($options);
         if (count($popular_posts)) {
             echo '<div class="blog-list-widget"><div class="list-group">';
             foreach($popular_posts as $post) {
@@ -60,6 +68,16 @@ class Wpc_Popular_Posts extends WP_Widget
         } else {
             $alt_content = 'post_date';
         }
+        if (isset($instance['orderby'])) {
+            $orderby = $instance['orderby'];
+        } else {
+            $orderby = 'post_views';
+        }
+        if (isset($instance['order'])) {
+            $order = $instance['order'];
+        } else {
+            $order = 'desc';
+        }
         ?>
         <p>
             <label for="<?php echo $this->get_field_id('title'); ?>">Widget Title</label>
@@ -76,6 +94,20 @@ class Wpc_Popular_Posts extends WP_Widget
                 <option value="post_views" <?php echo ($alt_content == 'post_views') ? 'selected' : ''; ?>>Post views</option>
             </select>
         </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('orderby'); ?>">Order By</label>
+            <select name="<?php echo $this->get_field_name('orderby') ?>" id="<?php echo $this->get_field_id('orderby'); ?>">
+                <option value="post_date" <?php echo ($orderby == 'post_date') ? 'selected' : ''; ?>>Post date</option>
+                <option value="post_views" <?php echo ($orderby == 'post_views') ? 'selected' : ''; ?>>Post views</option>
+            </select>
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('order'); ?>">Order</label>
+            <select name="<?php echo $this->get_field_name('order') ?>" id="<?php echo $this->get_field_id('order'); ?>">
+                <option value="desc" <?php echo ($order == 'desc') ? 'selected' : ''; ?>>DESC</option>
+                <option value="asc" <?php echo ($order == 'asc') ? 'selected' : ''; ?>>ASC</option>
+            </select>
+        </p>
         <?php
     }
 
@@ -85,10 +117,8 @@ class Wpc_Popular_Posts extends WP_Widget
         $new_data['posts_count'] = (isset($new_instance['posts_count']) && is_numeric($new_instance['posts_count'])
             && $new_instance['posts_count'] > 0) ? ((int)($new_instance['posts_count'])) : $old_instance['posts_count'];
         $new_data['alt_content'] = (in_array($new_instance['alt_content'], ['post_views', 'post_date'])) ? $new_instance['alt_content'] : $old_instance['alt_content'];
+        $new_data['orderby'] = (in_array($new_instance['orderby'], ['post_views', 'post_date'])) ? $new_instance['orderby'] : $old_instance['orderby'];
+        $new_data['order'] = (in_array($new_instance['order'], ['desc', 'asc'])) ? $new_instance['order'] : $old_instance['order'];
         return $new_data;                
     }
 }
-
-add_action('widgets_init', function() {
-    register_widget('Wpc_Popular_Posts');
-});
