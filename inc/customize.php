@@ -21,6 +21,8 @@ if (!function_exists('wpc_customize_register')) {
         // Footer Signature
         $wp_customize->add_setting('footer_signature', [
             'default' => '',
+            'sanitize_callback' => 'wpc_sanitize_footer_signature',
+            'validate_callback' => 'wpc_validate_footer_signature',
         ]);
         $wp_customize->add_control('footer_signature', [
             'type' => 'textarea',
@@ -71,3 +73,20 @@ add_action('wp_head', function() {
     }
     echo '}</style>';
 }, 99);
+
+function wpc_sanitize_footer_signature($footer_signature)
+{
+    return wp_kses($footer_signature, [
+        'a' => [
+            'href' => []
+        ]
+    ]);
+}
+
+function wpc_validate_footer_signature($validity, $footer_signature)
+{
+    if (mb_strlen($footer_signature) > 100) {
+        $validity->add('invalid_footer_signature', 'Footer Signature is too long');
+    }
+    return $validity;
+}
