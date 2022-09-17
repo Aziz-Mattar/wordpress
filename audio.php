@@ -3,6 +3,7 @@ get_header();
 while (have_posts()) {
     the_post();
     $attachment_id = get_the_ID();
+    $attachment_meta = wp_get_attachment_metadata($attachment_id);
 ?>
 <div class="page-title">
     <div class="container">
@@ -33,7 +34,9 @@ while (have_posts()) {
                     </div>
                     <!-- Attachment Picture //-->
                     <div class="single-post-media">
-                        <?php echo wp_get_attachment_image($attachment_id, 'full'); ?>
+                        <audio controls>
+                            <source src="<?php echo wp_get_attachment_url($attachment_id) ?>" type="<?php echo $attachment_meta['mime_type']; ?>">
+                        </audio>
                     </div>
                     <!-- Caption //-->
                     <?php
@@ -45,33 +48,16 @@ while (have_posts()) {
                     <?php } ?>
                     <!-- Description //-->
                     <?php if(!empty(get_the_content())) { ?>
-                    <h4>About the picture</h4>
+                    <h4>About the file</h4>
                     <div class="blog-content"><?php the_content(); ?></div>
                     <?php } ?>
                     <!-- Meta //-->
-                    <h4>Picture Information</h4>
-                    <?php $attachment_meta = wp_get_attachment_metadata($attachment_id); ?>
+                    <h4>File Meta Data</h4>
+                    
                     <table class="table">
-                        <tr>
-                            <td>Dimension</td>
-                            <td><?php echo $attachment_meta['width'] . 'x' . $attachment_meta['height']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Size</td>
-                            <td><?php echo size_format(filesize(get_attached_file($attachment_id)), 2); ?></td>
-                        </tr>
-                        <tr>
-                            <td>Thumbnails</td>
-                            <td>
-                                <?php
-                                foreach ($attachment_meta['sizes'] as $size => $info) {
-                                    echo '<p>'.ucwords(str_replace('_', ' ', $size)).' :'.$info['width'].'x'.$info['height'].'</p>';
-                                }
-                                ?>
-                            </td>
-                        </tr>
                         <?php
-                        foreach ($attachment_meta['image_meta'] as $key => $value) {
+                        foreach ($attachment_meta as $key => $value) {
+                            $value = ($key == 'filesize') ? size_format($value, 2) : $value;
                             echo '<tr>';
                             echo '<td>' . ucwords(str_replace('_', ' ', $key)) . '</td>';
                             echo '<td>' . $value . '</td>';
