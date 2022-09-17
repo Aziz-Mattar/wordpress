@@ -21,7 +21,11 @@
                 <div class="col-lg-8 offset-lg-2">
                     <div class="widget">
                         <div class="footer-text text-center">
-                            <a href="index.html"><img src="assets/images/flogo.png" alt="" class="img-fluid"></a>
+                            <?php
+                            if (has_custom_logo()) {
+                                the_custom_logo();
+                            }
+                            ?>
                             <p><?php echo get_theme_mod('footer_signature', ''); ?></p>
                             <div class="social">
                                 <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>              

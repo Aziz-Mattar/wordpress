@@ -91,7 +91,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="logo">
-                        <a href="index.html"><img src="images/logo.png" alt=""></a>
+                        <?php
+                        if (has_custom_logo()) {
+                            the_custom_logo();
+                        }
+                        ?>
                     </div><!-- end logo -->
                 </div>
             </div><!-- end row -->
