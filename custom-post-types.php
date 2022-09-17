@@ -7,7 +7,7 @@ if (!function_exists('wpc_register_post_types')) {
             'public' => true,
             'show_in_rest' => true,
             'has_archive' => true,
-            'supports' => ['title', 'editor', 'comments', 'excerpt', 'thumbnail', 'revisions'],
+            'supports' => ['title', 'editor', 'comments', 'excerpt', 'thumbnail', 'revisions', 'custom-fields'],
             'rewrite' => [
                 'slug' => __('ad', 'wpcourse'),
             ],
