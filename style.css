@@ -1,0 +1,24 @@
+/*
+
+Theme name: WP Course
+Theme URI: https://fjobeir.com
+Author: Feras Jobeir
+Author URI: https://fb.com/ferasjobeir
+License: GNU GPL v2
+License URI: http://gnu.org/licenses/gpl-2.0.html
+Description: This is an amazing Theme
+Version: 1.0
+Tags: blog, two-columns
+Text domain: wpc
+
+*/
+
+img {
+    height: auto
+}
+
+iframe.instagram-media {
+    max-width: 100% !important;
+    width: 100% !important;
+    min-width: auto !important;
+}
