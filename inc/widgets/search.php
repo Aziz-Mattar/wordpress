@@ -7,7 +7,10 @@ class Wpc_Search extends WP_Widget
         parent::__construct(
             'wpc_search_widget',
             'WPC Search',
-            ['description' => 'Add a search field']
+            [
+                'description' => 'Add a search field',
+                'customize_selective_refresh' => true,
+            ]
         );
     }
 

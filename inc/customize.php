@@ -11,6 +11,14 @@ if (!function_exists('wpc_customize_register')) {
         // Copyrights
         $wp_customize->add_setting('footer_copy_rights', [
             'default' => '',
+            'transport' => 'postMessage',
+        ]);
+        $wp_customize->selective_refresh->add_partial('footer_copy_rights', [
+            'selector' => '.copyright',
+            'container_inclusive' => false,
+            'render_callback' => function() {
+                echo get_theme_mod('footer_copy_rights', '');
+            }
         ]);
         $wp_customize->add_control('footer_copy_rights', [
             'type' => 'text',
@@ -23,6 +31,7 @@ if (!function_exists('wpc_customize_register')) {
             'default' => '',
             'sanitize_callback' => 'wpc_sanitize_footer_signature',
             'validate_callback' => 'wpc_validate_footer_signature',
+            'transport' => 'postMessage',
         ]);
         $wp_customize->add_control('footer_signature', [
             'type' => 'textarea',
@@ -90,3 +99,12 @@ function wpc_validate_footer_signature($validity, $footer_signature)
     }
     return $validity;
 }
+
+
+
+add_action('customize_preview_init', function() {
+    wp_enqueue_script('customize_post_message', get_template_directory_uri().'/assets/js/customize.js', [
+        'jquery',
+        'customize-preview',
+    ]);
+});

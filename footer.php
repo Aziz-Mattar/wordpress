@@ -26,7 +26,7 @@
                                 the_custom_logo();
                             }
                             ?>
-                            <p><?php echo get_theme_mod('footer_signature', ''); ?></p>
+                            <p class="footer_signature"><?php echo get_theme_mod('footer_signature', ''); ?></p>
                             <div class="social">
                                 <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>              
                                 <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>

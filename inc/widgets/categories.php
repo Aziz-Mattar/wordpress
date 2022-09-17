@@ -7,7 +7,10 @@ class Wpc_Categories extends WP_Widget
         parent::__construct(
             'wpc_categories_widget',
             'WPC Categories',
-            ['description' => 'This widget creates a categories list.']
+            [
+                'description' => 'This widget creates a categories list.',
+                'customize_selective_refresh' => true,
+            ]
         );
     }
     function widget($args, $instance)

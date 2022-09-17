@@ -3,7 +3,14 @@
 class Wpc_Posts_List extends WP_Widget
 {
     function __construct() {
-        parent::__construct('wpc_posts_list', 'WPC Posts List', ['description' => 'This widget creates a posts list']);
+        parent::__construct(
+            'wpc_posts_list',
+            'WPC Posts List', 
+            [
+                'description' => 'This widget creates a posts list',
+                'customize_selective_refresh' => true,
+            ]
+        );
     }
 
     function widget($args, $instance) {

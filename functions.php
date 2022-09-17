@@ -28,6 +28,11 @@ if (!function_exists('wpc_setup')) {
             'top-menu' => 'Top Menu',
             'main-menu' => 'Main Menu',
         ]);
+        add_theme_support('custom-logo', [
+            'width' => 300,
+            'height' => 100,
+        ]);
+        add_theme_support('customize-selective-refresh-widgets');
     }
     add_action('after_setup_theme', 'wpc_setup');
 }
