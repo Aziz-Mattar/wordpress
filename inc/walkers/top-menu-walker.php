@@ -47,7 +47,9 @@ class Wpc_Top_Menu_Walker extends Walker_Nav_Menu {
 
 		$item_output  = $args->before;
 		$item_output .= '<a' . $attributes . '>';
-		$item_output .= '<i class="fa fa-star"></i> ';
+		if (!empty($item->icon)) {
+			$item_output .= '<i class="fa '.$item->icon.'"></i> ';
+		}
 		$item_output .= $args->link_before . $title . $args->link_after;
 		$item_output .= '</a>';
 		$item_output .= $args->after;
