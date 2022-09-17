@@ -33,3 +33,4 @@ if (!function_exists('wpc_setup')) {
 }
 
 require get_template_directory() . '/inc/widgets/widgets.php';
+require get_template_directory() . '/inc/walkers/walkers.php';

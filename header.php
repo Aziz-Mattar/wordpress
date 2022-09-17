@@ -76,6 +76,7 @@
                             'theme_location' => 'top-menu',
                             'container' => '',
                             'menu_class' => 'list-inline',
+                            'walker' => new Wpc_Top_Menu_Walker
                         ]);
                         ?>
                     </div><!-- end topmenu -->
