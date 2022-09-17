@@ -33,6 +33,7 @@ if (!function_exists('wpc_setup')) {
             'height' => 100,
         ]);
         add_theme_support('customize-selective-refresh-widgets');
+        add_image_size('horizontal', 800, 460, true);
     }
     add_action('after_setup_theme', 'wpc_setup');
 }

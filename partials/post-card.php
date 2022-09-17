@@ -8,7 +8,7 @@ $post_categories = get_the_terms($post_id, 'category');
     <div class="blog-box">
         <div class="post-media">
             <a href="<?php echo $post_link; ?>" title="<?php echo $post_title; ?>">
-                <?php the_post_thumbnail('medium'); ?>
+                <?php the_post_thumbnail('horizontal'); ?>
                 <div class="hovereffect">
                     <span></span>
                 </div><!-- end hover -->

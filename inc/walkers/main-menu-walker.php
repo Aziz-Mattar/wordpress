@@ -161,7 +161,7 @@ class Wpc_Main_Menu_Walker extends Walker_Nav_Menu {
                 <div class="blog-box">
                     <div class="post-media">
                         <a href="'.esc_url($item->url).'" title="">
-                            <img src="'.esc_url(get_the_post_thumbnail_url($item->object_id, 'medium')).'" alt="" class="img-fluid">
+                            <img src="'.esc_url(get_the_post_thumbnail_url($item->object_id, 'horizontal')).'" alt="" class="img-fluid">
                             <div class="hovereffect">
                             </div><!-- end hover -->
                             <span class="menucat">'.$object_category.'</span>
