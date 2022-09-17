@@ -17,15 +17,13 @@ while(have_posts()) {
                 <div class="page-wrapper">
                     <div class="blog-title-area">
                         <ol class="breadcrumb hidden-xs-down">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Blog</a></li>
-                            <li class="breadcrumb-item active">The golden rules you need to know for a positive life</li>
+                        <?php echo implode('', wpc_generate_breadcrumb()); ?>
                         </ol>
                         <?php 
                         $categories = get_the_terms($post_id, 'category');
                         if (is_array($categories)) {
                             foreach($categories as $category) {
-                                echo '<span class="color-aqua"><a href="'.get_term_link($category).'" title="">'.$category->name.'</a></span>';
+                                echo '<span class="color-'.wpc_get_term_color($category->term_id).'"><a href="'.get_term_link($category).'" title="">'.$category->name.'</a></span>';
                             }
                         }
                         ?>

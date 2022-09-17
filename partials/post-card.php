@@ -18,7 +18,7 @@ $post_categories = get_the_terms($post_id, 'category');
             <?php
             if (is_array($post_categories)) {
                 foreach ($post_categories as $category) {
-                    echo '<span class="bg-grey"><a href="'.get_term_link($category).'" title="">'.$category->name.'</a></span>';
+                    echo '<span class="bg-'.wpc_get_term_color($category->term_id).'"><a href="'.get_term_link($category).'" title="">'.$category->name.'</a></span>';
                 }
             }
             ?>
