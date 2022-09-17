@@ -3,19 +3,20 @@
 class Wpc_Popular_Posts extends WP_Widget
 {
     function __construct() {
-        parent::__construct('wpc_popular_posts', 'WPC Popular Posts');
+        parent::__construct('wpc_popular_posts', 'WPC Popular Posts', ['description' => 'This widget creates a posts list ordered by post views']);
     }
 
     function widget($args, $instance) {
         echo $args['before_widget'];
-        if (isset($instance['title'])) {
-            echo $args['before_title'] . $instance['title'] . $args['after_title'];
+        $title = apply_filters('widget_title', $instance['title']);
+        if (!empty($title)) {
+            echo $args['before_title'] . $title . $args['after_title'];
         }
         $popular_posts = get_posts([
             'orderby' => 'meta_value_num',
             'meta_key' => 'wpc_post_views',
             'order' => 'desc',
-            'numberposts' => (isset($instance['posts_count']) && is_numeric($instance['posts_count']) && $instance['posts_count'] > 0) ? $instance['posts_count'] : 4,
+            'numberposts' => (isset($instance['posts_count'])) ? $instance['posts_count'] : 4,
         ]);
         if (count($popular_posts)) {
             echo '<div class="blog-list-widget"><div class="list-group">';
@@ -28,7 +29,7 @@ class Wpc_Popular_Posts extends WP_Widget
                         <small>
                         <?php
                         if (isset($instance['alt_content']) && $instance['alt_content'] == 'post_views') {
-                            ?><i class="fa fa-eye"></i><?php echo ((int)(get_post_meta($post->ID, 'wpc_post_views', true))) ?><?php
+                            ?><i class="fa fa-eye"></i> <?php echo ((int)(get_post_meta($post->ID, 'wpc_post_views', true))) ?><?php
                         } else {
                             echo get_the_date('d M, Y', $post);
                         }
@@ -61,21 +62,30 @@ class Wpc_Popular_Posts extends WP_Widget
         }
         ?>
         <p>
-            <label for="">Widget Title</label>
-            <input type="text" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo $title; ?>">
+            <label for="<?php echo $this->get_field_id('title'); ?>">Widget Title</label>
+            <input type="text" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo esc_attr($title); ?>" id="<?php echo $this->get_field_id('title'); ?>">
         </p>
         <p>
-            <label for="">Posts Count</label>
-            <input type="number" name="<?php echo $this->get_field_name('posts_count'); ?>" value="<?php echo $posts_count; ?>" min="1" id="">
+            <label for="<?php echo $this->get_field_id('posts_count'); ?>">Posts Count</label>
+            <input type="number" name="<?php echo $this->get_field_name('posts_count'); ?>" value="<?php echo esc_attr($posts_count); ?>" min="1" id="<?php echo $this->get_field_id('posts_count'); ?>">
         </p>
         <p>
-            <label for="">Alt Content</label>
-            <select name="<?php echo $this->get_field_name('alt_content') ?>" id="">
+            <label for="<?php echo $this->get_field_id('alt_content'); ?>">Alt Content</label>
+            <select name="<?php echo $this->get_field_name('alt_content') ?>" id="<?php echo $this->get_field_id('alt_content'); ?>">
                 <option value="post_date" <?php echo ($alt_content == 'post_date') ? 'selected' : ''; ?>>Post date</option>
                 <option value="post_views" <?php echo ($alt_content == 'post_views') ? 'selected' : ''; ?>>Post views</option>
             </select>
         </p>
         <?php
+    }
+
+    function update($new_instance, $old_instance) {
+        $new_data = [];
+        $new_data['title'] = (!empty($new_instance['title'])) ? strip_tags($new_instance['title']) : $old_instance['title'];
+        $new_data['posts_count'] = (isset($new_instance['posts_count']) && is_numeric($new_instance['posts_count'])
+            && $new_instance['posts_count'] > 0) ? ((int)($new_instance['posts_count'])) : $old_instance['posts_count'];
+        $new_data['alt_content'] = (in_array($new_instance['alt_content'], ['post_views', 'post_date'])) ? $new_instance['alt_content'] : $old_instance['alt_content'];
+        return $new_data;                
     }
 }
 
