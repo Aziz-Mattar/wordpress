@@ -40,7 +40,7 @@ while (have_posts()) {
                     $attachment_caption = wp_get_attachment_caption($attachment_id);
                     if (!empty($attachment_caption)) {
                     ?>
-                    <h4>What is this</h4>
+                    <h4><?php _e('What is this', 'wpc'); ?></h4>
                     <p><?php echo $attachment_caption; ?></p>
                     <?php } ?>
                     <!-- Description //-->
