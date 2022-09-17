@@ -53,3 +53,7 @@ iframe.instagram-media {
 .comment #respond {
     width: 100%;
 }
+
+.comment-edit-link {
+    margin-left:1em !important;
+}

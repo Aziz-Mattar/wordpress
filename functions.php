@@ -48,60 +48,8 @@ add_filter('get_the_archive_title', function($title, $original_title, $prefix) {
     return $original_title;
 }, 10, 3);
 
-add_filter('comment_form_fields', function ($fields) {
-    return [
-        'author' => $fields['author'],
-        'email' => $fields['email'],
-        'url' => $fields['url'],
-        'comment' => $fields['comment'],
-    ];
-});
-
-if (!function_exists('wpc_comment_callback')) {
-    function wpc_comment_callback($comment, $args, $depth)
-    {
-        $tag = $args['style'] == 'div' ? 'div' : 'li';
-        ?>
-        <<?php echo $tag; ?> <?php comment_class('media'); ?> id="comment-<?php echo $comment->comment_ID; ?>">
-            <?php if (get_option('show_avatars') == '1') { ?>
-            <a class="media-left" href="#">
-                <?php echo get_avatar($comment, $args['avatar_size'], false, false, ['class' => 'rounded-circle']) ?>
-            </a>
-            <?php } ?>
-            <div class="media-body" id="comment-body-<?php echo $comment->comment_ID; ?>">
-                <h4 class="media-heading user_name">
-                <?php echo get_comment_author_link($comment); ?> 
-                <small><?php printf(
-                    /* translators: %s is a time difference */
-                    __('%s ago', 'wpc'),
-                    human_time_diff(get_comment_time('U'), current_time('U'))
-                ); ?></small></h4>
-                <p><?php comment_text(); ?></p>
-                <?php 
-                comment_reply_link([
-                    'depth' => $depth,
-                    'max_depth' => $args['max_depth'],
-                    'reply_text' => __('Reply', 'wpc'),
-                    'add_below' => 'comment-body',
-                ]);
-                ?>
-            </div>
-        <?php
-    }
-}
-
-add_filter('comment_reply_link', function($link) {
-    return str_replace("class='", "class='btn btn-primary btn-sm ", $link);
-});
-if (!function_exists('wpc_comments_pagination_attributes')) {
-    add_filter('next_comments_link_attributes', 'wpc_comments_pagination_attributes');
-    add_filter('previous_comments_link_attributes', 'wpc_comments_pagination_attributes');
-    function wpc_comments_pagination_attributes()
-    {
-        return 'class="btn btn-primary"';
-    }
-}
 require get_template_directory() . '/inc/widgets/widgets.php';
 require get_template_directory() . '/inc/walkers/walkers.php';
 require get_template_directory() . '/inc/customize.php';
 require get_template_directory() . '/inc/helpers.php';
+require get_template_directory() . '/inc/comments.php';
